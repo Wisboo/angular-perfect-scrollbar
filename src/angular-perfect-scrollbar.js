@@ -4,6 +4,8 @@
  * https://github.com/itsdrewmiller/angular-perfect-scrollbar
  */
 
+const PerfectScrollbar = require('perfect-scrollbar').default;
+
 angular
   .module('perfect_scrollbar', [])
 
