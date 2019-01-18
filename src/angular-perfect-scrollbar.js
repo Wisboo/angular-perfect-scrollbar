@@ -30,6 +30,9 @@ angular
       transclude: true,
       template: '<div><div ng-transclude></div></div>',
       replace: true,
+      scope: {
+        perfectScrollTo: '=?'
+      },
       //
       link: function ($scope, $elem, $attr) {
         var jqWindow = angular.element($window);
@@ -64,6 +67,22 @@ angular
             });
           });
         });
+
+        // Make scroll to specific value
+        $scope.$watch('perfectScrollTo', function (newVal) {
+          if (newVal !== undefined) {
+            makeScrollTo(newVal);
+            $scope.perfectScrollTo = undefined;
+          }
+        });
+
+        function makeScrollTo(value) {
+          if (value === 'top') {
+            $elem[0].scrollTop = 0;
+          } else if (value === 'bottom') {
+            $elem[0].scrollTop = $elem[0].scrollHeight;
+          }
+        }
 
         // Automatically update when content height changes
         $scope.$watch(function () {
