@@ -29,7 +29,9 @@ angular
       template: '<div><div ng-transclude></div></div>',
       replace: true,
       scope: {
-        perfectScrollTo: '=?'
+        perfectScrollTo: '=?',
+        perfectScrollLeft: '=?',
+        perfectScrollTop: '=?'
       },
       //
       link: function ($scope, $elem, $attr) {
@@ -54,6 +56,8 @@ angular
             var scrollHeight = $elem.prop('scrollHeight') - $elem[0].clientHeight;
             var scrollLeft = $elem.prop('scrollLeft');
             var scrollWidth = $elem.prop('scrollWidth') - $elem[0].clientWidth;
+            $scope.perfectScrollLeft = scrollLeft;
+            $scope.perfectScrollTop = scrollTop;
 
             $scope.$apply(function () {
               onScrollHandler($scope, {
