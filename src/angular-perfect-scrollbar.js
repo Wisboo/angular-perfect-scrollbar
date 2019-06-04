@@ -31,6 +31,7 @@ angular
       scope: {
         perfectScrollTo: '=?',
         perfectScrollLeft: '=?',
+        perfectScrollRight: '=?',
         perfectScrollTop: '=?'
       },
       //
@@ -51,12 +52,15 @@ angular
           perfect = new PerfectScrollbar($elem[0], options);
           var onScrollHandler = $parse($attr.onScroll);
 
+          $scope.perfectScrollRight = $elem[0].scrollWidth - $elem[0].clientWidth - $elem[0].scrollLeft;
+
           $elem.on('scroll', function () {
             var scrollTop = $elem.prop('scrollTop');
             var scrollHeight = $elem.prop('scrollHeight') - $elem[0].clientHeight;
             var scrollLeft = $elem.prop('scrollLeft');
             var scrollWidth = $elem.prop('scrollWidth') - $elem[0].clientWidth;
             $scope.perfectScrollLeft = scrollLeft;
+            $scope.perfectScrollRight = scrollWidth - scrollLeft;
             $scope.perfectScrollTop = scrollTop;
 
             $scope.$apply(function () {
@@ -103,6 +107,7 @@ angular
               }, 100);
             }
 
+            $scope.perfectScrollRight = $elem[0].scrollWidth - $elem[0].clientWidth - $elem[0].scrollLeft;
             perfect.update();
           });
         }
